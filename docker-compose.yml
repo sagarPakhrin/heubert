@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: heubert_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/heubert'
+    ports:
+      - 5000:5000
+    command: npm start api
+  mysql:
+    image: mysql:8
+    container_name: heubert_mysql
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
