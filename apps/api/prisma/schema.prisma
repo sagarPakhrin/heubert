@@ -16,14 +16,14 @@ model Lead {
   lead_number            Int
   origin                 String
   source                 String
-  notes                  String?
+  notes                  String?   @db.Text
   stage                  String // could be enum 
   engagement_score       Int       @default(0)
   total_visits           Int       @default(0)
-  page_views_per_visit   Float     @default(0)
-  average_time_per_visit Float     @default(0)
+  page_views_per_visit   Float?    @default(0)
+  average_time_per_visit Float?    @default(0)
   last_activity          String
-  last_activity_date     DateTime
+  last_activity_date     DateTime?
   lead_conversion_date   DateTime?
   city_old               String?
   specialization         String?
