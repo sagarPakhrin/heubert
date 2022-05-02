@@ -6,6 +6,29 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("shadowDatabaseUrl")
+}
+
+model Lead {
+  id                     Int       @id @default(autoincrement())
+  lead_number            Int
+  origin                 String
+  source                 String
+  notes                  String?
+  stage                  String // could be enum 
+  engagement_score       Int       @default(0)
+  total_visits           Int       @default(0)
+  page_views_per_visit   Float     @default(0)
+  average_time_per_visit Float     @default(0)
+  last_activity          String
+  last_activity_date     DateTime
+  lead_conversion_date   DateTime?
+  city_old               String?
+  specialization         String?
+  entrance_test          String?
+  current_occupation     String?
+
+  // schema is made kept this for simplicities sake
 }
