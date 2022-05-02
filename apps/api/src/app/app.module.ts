@@ -1,6 +1,7 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { LeadsModule } from '../leads/leads.module';
 import { AppResolver } from './app.resolver';
 
 @Module({
@@ -9,6 +10,7 @@ import { AppResolver } from './app.resolver';
       driver: ApolloDriver,
       autoSchemaFile: true,
     }),
+    LeadsModule,
   ],
   providers: [AppResolver],
 })
