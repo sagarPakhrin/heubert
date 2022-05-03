@@ -11,6 +11,16 @@ services:
     ports:
       - 5000:5000
     command: npm start api
+  frontend:
+    container_name: heubert_fe
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/heubert'
+    ports:
+      - 3000:3000
+    command: npm start frontend
   mysql:
     image: mysql:8
     container_name: heubert_mysql
