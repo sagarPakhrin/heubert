@@ -24,6 +24,8 @@
     "@prisma/client": "^3.13.0",
     "@types/moment": "^2.13.0",
     "apollo-server-express": "^3.6.7",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "csv-parser": "^3.0.0",
     "graphql": "^16.4.0",
     "moment": "^2.29.3",
