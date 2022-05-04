@@ -11,4 +11,14 @@ export class LeadsResolver {
   leads(@Args() args: QueryArgs) {
     return this.leadsService.findAll(args);
   }
+
+  @Query(() => [String])
+  leadOrigins(): Promise<string[]> {
+    return this.leadsService.findLeadOrigins();
+  }
+
+  @Query(() => [String])
+  leadSources() {
+    return this.leadsService.findLeadSources();
+  }
 }

@@ -10,4 +10,34 @@ export class LeadsService {
   ) {
     return this.prisma.lead.findMany(args);
   }
+
+  async findLeadOrigins(): Promise<string[]> {
+    const origins = await this.prisma.lead.findMany({
+      select: {
+        origin: true,
+      },
+      distinct: ['origin'],
+      where: {
+        origin: {
+          not: '',
+        },
+      },
+    });
+    return origins.map(({ origin }) => origin);
+  }
+
+  async findLeadSources(): Promise<string[]> {
+    const origins = await this.prisma.lead.findMany({
+      select: {
+        source: true,
+      },
+      distinct: ['source'],
+      where: {
+        source: {
+          not: '',
+        },
+      },
+    });
+    return origins.map(({ source }) => source);
+  }
 }
