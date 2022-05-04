@@ -6,6 +6,9 @@ export class LeadsOrderByInput {
   id?: SortOrder;
 
   @Field(() => SortOrder, { nullable: true })
+  lead_number?: SortOrder;
+
+  @Field(() => SortOrder, { nullable: true })
   engagement_score?: SortOrder;
 
   @Field(() => SortOrder, { nullable: true })

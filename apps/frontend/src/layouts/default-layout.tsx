@@ -6,7 +6,7 @@ export const DefaultLayout = () => {
     <div className="flex bg-gray-50 w-full h-screen">
       <Sidebar />
       <div className="overflow-y-auto flex-1 flex flex-col">
-        <div className="flex-1 py-12 px-4">
+        <div className="flex-1 pt-12 px-4">
           <Outlet />
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client';
 
 const FETCH_LEADS = gql`
-  query fetchLeads {
-    leads {
+  query fetchLeads($skip: Float, $orderBy: LeadsOrderByInput) {
+    leads(skip: $skip, orderBy: $orderBy) {
       id
       lead_number
       origin
@@ -24,6 +24,34 @@ const FETCH_LEADS = gql`
   }
 `;
 
-export const useLeads = () => {
-  return useQuery(FETCH_LEADS);
+export enum SortOrder {
+  asc = 'asc',
+  desc = 'desc',
+}
+
+export interface LeadsOrderBy {
+  id?: SortOrder;
+  lead_number?: SortOrder;
+  engagement_score?: SortOrder;
+  last_activity_date?: SortOrder;
+}
+
+interface UseLeadsProps {
+  page: number;
+  orderBy: LeadsOrderBy;
+}
+
+export const TAKE = 20;
+
+export const useLeads = ({ page = 1, orderBy }: UseLeadsProps) => {
+  if (page <= 0) {
+    page = 1;
+  }
+
+  return useQuery(FETCH_LEADS, {
+    variables: {
+      skip: (page - 1) * TAKE,
+      orderBy,
+    },
+  });
 };
