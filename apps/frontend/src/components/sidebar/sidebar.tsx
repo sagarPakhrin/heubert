@@ -17,7 +17,7 @@ const Sidebar = () => {
   ];
   return (
     <div
-      className={`pb-8 h-full w-80 bg-gray-900 hidden lg:flex flex-shrink-0 flex-col text-gray-300 overflow-x-hidden overflow-y-auto transition-all delay-75 sidebar
+      className={`pb-8 h-full w-80 bg-gray-900 flex flex-shrink-0 flex-col text-gray-300 overflow-x-hidden overflow-y-auto transition-all delay-75 sidebar
       'px-7 active'
     `}
     >
