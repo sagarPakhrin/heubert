@@ -34,3 +34,7 @@ The project is setup using [docker](https://docs.docker.com/engine/install/ubunt
 5. Seed database
 
    `npm run prisma:seed`
+
+6. Visit http://localhost:3000
+
+**You can view graphql schema at http://localhost:5000/graphql**
