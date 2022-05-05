@@ -61,12 +61,14 @@ export const Leads = () => {
         next={next}
       />
 
-      <Drawer
-        open={showDrawer}
-        onClose={() => setShowDrawer(false)}
-        activeFilters={activeFilters}
-        setActiveFilters={setActiveFilters}
-      />
+      {showDrawer && (
+        <Drawer
+          open={showDrawer}
+          onClose={() => setShowDrawer(false)}
+          activeFilters={activeFilters}
+          setActiveFilters={setActiveFilters}
+        />
+      )}
     </div>
   );
 };

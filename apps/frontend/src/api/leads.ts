@@ -6,8 +6,9 @@ const FETCH_LEADS = gql`
     $skip: Float
     $orderBy: LeadsOrderByInput
     $where: LeadsWhereInput
+    $take: Float
   ) {
-    leads(skip: $skip, orderBy: $orderBy, where: $where) {
+    leads(skip: $skip, orderBy: $orderBy, where: $where, take: $take) {
       data {
         id
         lead_number
@@ -89,6 +90,7 @@ export const useLeads = ({ page = 1, orderBy, filters }: UseLeadsProps) => {
       skip: (page - 1) * TAKE,
       orderBy,
       where,
+      take: TAKE,
     },
   });
 };
