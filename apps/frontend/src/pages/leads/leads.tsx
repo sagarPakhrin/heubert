@@ -35,7 +35,7 @@ export const Leads = () => {
   const next = () => {
     if (!data) return;
 
-    setPage((old) => (old < 200 ? old + 1 : old));
+    setPage((old) => (old < data?.leads.meta.total ? old + 1 : old));
   };
 
   const sortLeads = (orderBy: LeadsOrderBy) => {
