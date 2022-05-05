@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from '@heroicons/react/solid';
+import { ArrowUpIcon, FilterIcon } from '@heroicons/react/solid';
 import moment from 'moment';
 import { LeadsOrderBy, SortOrder } from '../../../api/leads';
 import { classNames } from '../../../utils/class-names';
@@ -27,6 +27,7 @@ export interface LeadsTableProps {
   leads: Lead[];
   orderBy: LeadsOrderBy;
   sortLeads: (orderBy: LeadsOrderBy) => void;
+  openDrawer: () => void;
 }
 
 const sortable_keys = {
@@ -35,7 +36,12 @@ const sortable_keys = {
   last_activity_date: 'last_activity_date',
 };
 
-export const LeadsTable = ({ leads, orderBy, sortLeads }: LeadsTableProps) => {
+export const LeadsTable = ({
+  leads,
+  orderBy,
+  sortLeads,
+  openDrawer,
+}: LeadsTableProps) => {
   const order = Object.keys(orderBy)[0];
 
   const setOrder = (sort_key: keyof typeof sortable_keys) => {
@@ -126,10 +132,22 @@ export const LeadsTable = ({ leads, orderBy, sortLeads }: LeadsTableProps) => {
               </div>
             </th>
             <th scope="col" className="px-6 py-3 w-56">
-              Lead Origin
+              <div className="flex items-center gap-2">
+                <span>Lead Origin</span>
+                <FilterIcon
+                  className="w-4 h-4 text-gray--500 cursor-pointer"
+                  onClick={openDrawer}
+                />
+              </div>
             </th>
             <th scope="col" className="px-6 py-3 w-44">
-              Lead Source
+              <div className="flex items-center gap-2">
+                <span>Lead Source</span>
+                <FilterIcon
+                  className="w-4 h-4 text-gray--500 cursor-pointer"
+                  onClick={openDrawer}
+                />
+              </div>
             </th>
             <th scope="col" className="px-6 py-3 w-64">
               Notes

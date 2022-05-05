@@ -1,8 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
+import { Filters } from '../pages/leads/leads';
 
 const FETCH_LEADS = gql`
-  query fetchLeads($skip: Float, $orderBy: LeadsOrderByInput) {
-    leads(skip: $skip, orderBy: $orderBy) {
+  query fetchLeads(
+    $skip: Float
+    $orderBy: LeadsOrderByInput
+    $where: LeadsWhereInput
+  ) {
+    leads(skip: $skip, orderBy: $orderBy, where: $where) {
       id
       lead_number
       origin
@@ -24,6 +29,13 @@ const FETCH_LEADS = gql`
   }
 `;
 
+const FETCH_ORIGINS_AND_SOURCES = gql`
+  {
+    leadOrigins
+    leadSources
+  }
+`;
+
 export enum SortOrder {
   asc = 'asc',
   desc = 'desc',
@@ -38,20 +50,44 @@ export interface LeadsOrderBy {
 
 interface UseLeadsProps {
   page: number;
-  orderBy: LeadsOrderBy;
+  orderBy?: LeadsOrderBy;
+  filters?: Filters;
 }
 
 export const TAKE = 20;
 
-export const useLeads = ({ page = 1, orderBy }: UseLeadsProps) => {
+export const useLeads = ({ page = 1, orderBy, filters }: UseLeadsProps) => {
   if (page <= 0) {
     page = 1;
+  }
+  let where = {};
+
+  if (filters?.origin.length || filters?.source.length) {
+    where = {
+      OR: [
+        {
+          source: {
+            in: filters?.source,
+          },
+        },
+        {
+          origin: {
+            in: filters?.origin,
+          },
+        },
+      ],
+    };
   }
 
   return useQuery(FETCH_LEADS, {
     variables: {
       skip: (page - 1) * TAKE,
       orderBy,
+      where,
     },
   });
+};
+
+export const useOriginsAndSources = () => {
+  return useQuery(FETCH_ORIGINS_AND_SOURCES);
 };

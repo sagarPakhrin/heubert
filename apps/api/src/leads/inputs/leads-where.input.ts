@@ -1,10 +1,19 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class LeadsWhereInput {
-  @Field(() => String, { nullable: true })
-  origin?: string;
+export class StringFilter {
+  @Field(() => [String], { nullable: true })
+  in?: string[];
+}
 
-  @Field(() => String, { nullable: true })
-  source?: string;
+@InputType()
+export class LeadsWhereInput {
+  @Field(() => StringFilter, { nullable: true })
+  origin?: StringFilter;
+
+  @Field(() => StringFilter, { nullable: true })
+  source?: StringFilter;
+
+  @Field(() => [LeadsWhereInput], { nullable: true })
+  OR?: [LeadsWhereInput];
 }
