@@ -5,10 +5,22 @@ import { PrismaService } from '../shared/services/prisma.service';
 @Injectable()
 export class LeadsService {
   constructor(private readonly prisma: PrismaService) {}
-  findAll<T extends Prisma.LeadFindManyArgs>(
+
+  async findAll<T extends Prisma.LeadFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.LeadFindManyArgs>
   ) {
-    return this.prisma.lead.findMany(args);
+    const data = await this.prisma.lead.findMany(args);
+
+    const total = await this.prisma.lead.count({
+      where: args.where,
+    });
+
+    return {
+      data: data,
+      meta: {
+        total,
+      },
+    };
   }
 
   async findLeadOrigins(): Promise<string[]> {

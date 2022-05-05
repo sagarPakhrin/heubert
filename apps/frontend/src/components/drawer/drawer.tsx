@@ -105,6 +105,7 @@ const Drawer = ({
                   <label
                     htmlFor={origin}
                     className="flex items-center gap-3 text-gray-800"
+                    key={origin}
                   >
                     <input
                       type="checkbox"
@@ -127,6 +128,7 @@ const Drawer = ({
                   <label
                     htmlFor={source}
                     className="flex items-center gap-3 text-gray-800"
+                    key={source}
                   >
                     <input
                       type="checkbox"

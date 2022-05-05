@@ -8,23 +8,28 @@ const FETCH_LEADS = gql`
     $where: LeadsWhereInput
   ) {
     leads(skip: $skip, orderBy: $orderBy, where: $where) {
-      id
-      lead_number
-      origin
-      source
-      notes
-      stage
-      engagement_score
-      total_visits
-      page_views_per_visit
-      average_time_per_visit
-      last_activity
-      last_activity_date
-      lead_conversion_date
-      city_old
-      specialization
-      entrance_test
-      current_occupation
+      data {
+        id
+        lead_number
+        origin
+        source
+        notes
+        stage
+        engagement_score
+        total_visits
+        page_views_per_visit
+        average_time_per_visit
+        last_activity
+        last_activity_date
+        lead_conversion_date
+        city_old
+        specialization
+        entrance_test
+        current_occupation
+      }
+      meta {
+        total
+      }
     }
   }
 `;

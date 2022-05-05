@@ -14,7 +14,7 @@ export const Leads = () => {
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   const [activeFilters, setActiveFilters] = useState<Filters>({
-    origin: ['API'],
+    origin: [],
     source: [],
   });
 
@@ -42,10 +42,12 @@ export const Leads = () => {
     setOrderBy(orderBy);
   };
 
+  console.log(data);
+
   return (
     <div className="flex flex-col">
       <LeadsTable
-        leads={data?.leads ?? []}
+        leads={data?.leads.data ?? []}
         orderBy={orderBy}
         sortLeads={sortLeads}
         openDrawer={() => setShowDrawer(true)}
@@ -53,8 +55,8 @@ export const Leads = () => {
 
       <Pagination
         page={page}
-        perPage={20}
-        total={200}
+        perPage={data?.leads.data.length}
+        total={data?.leads?.meta?.total ?? 0}
         prev={prev}
         next={next}
       />

@@ -1,5 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { QueryArgs } from './args/get-leads.args';
+import { PaginatedLeads } from './dto/paginated-leads.dto';
 import { Lead } from './entities/lead.entity';
 import { LeadsService } from './leads.service';
 
@@ -7,8 +8,8 @@ import { LeadsService } from './leads.service';
 export class LeadsResolver {
   constructor(private readonly leadsService: LeadsService) {}
 
-  @Query(() => [Lead], { name: 'leads' })
-  leads(@Args() args: QueryArgs) {
+  @Query(() => PaginatedLeads, { name: 'leads' })
+  leads(@Args() args: QueryArgs): Promise<PaginatedLeads> {
     return this.leadsService.findAll(args);
   }
 
