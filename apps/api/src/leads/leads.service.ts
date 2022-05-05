@@ -52,4 +52,34 @@ export class LeadsService {
     });
     return origins.map(({ source }) => source);
   }
+
+  async report() {
+    const data = await this.prisma.lead.groupBy({
+      by: ['source'],
+      _count: {
+        source: true,
+      },
+    });
+    return data.map(({ _count, source }) => ({
+      source,
+      count: _count.source,
+    }));
+  }
+
+  async originAggregiate(source: string) {
+    const data = await this.prisma.lead.groupBy({
+      by: ['origin'],
+      _count: {
+        origin: true,
+      },
+      where: {
+        source,
+      },
+    });
+
+    return data.map(({ _count, origin }) => ({
+      origin,
+      count: _count.origin,
+    }));
+  }
 }

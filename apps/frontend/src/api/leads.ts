@@ -42,6 +42,24 @@ const FETCH_ORIGINS_AND_SOURCES = gql`
   }
 `;
 
+const FETCH_LEADS_FOR_REPORT = gql`
+  {
+    report {
+      source
+      count
+    }
+  }
+`;
+
+const FETCH_ORIGIN_AGG = gql`
+  query getOriginAggregiate($source: String!) {
+    getOriginAggregiate(source: $source) {
+      count
+      origin
+    }
+  }
+`;
+
 export enum SortOrder {
   asc = 'asc',
   desc = 'desc',
@@ -97,4 +115,17 @@ export const useLeads = ({ page = 1, orderBy, filters }: UseLeadsProps) => {
 
 export const useOriginsAndSources = () => {
   return useQuery(FETCH_ORIGINS_AND_SOURCES);
+};
+
+export const useLeadsForReport = () => {
+  return useQuery(FETCH_LEADS_FOR_REPORT);
+};
+
+export const useOriginAggregiate = (source: string) => {
+  return useQuery(FETCH_ORIGIN_AGG, {
+    variables: {
+      source: source,
+    },
+    skip: !source,
+  });
 };

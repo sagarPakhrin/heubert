@@ -42,8 +42,6 @@ export const Leads = () => {
     setOrderBy(orderBy);
   };
 
-  console.log(data);
-
   return (
     <div className="flex flex-col">
       <LeadsTable

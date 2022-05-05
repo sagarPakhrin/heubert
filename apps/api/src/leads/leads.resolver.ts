@@ -1,6 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { QueryArgs } from './args/get-leads.args';
 import { PaginatedLeads } from './dto/paginated-leads.dto';
+import { Report } from './dto/reports.dto';
 import { Lead } from './entities/lead.entity';
 import { LeadsService } from './leads.service';
 
@@ -21,5 +22,15 @@ export class LeadsResolver {
   @Query(() => [String])
   leadSources() {
     return this.leadsService.findLeadSources();
+  }
+
+  @Query(() => [Report])
+  report() {
+    return this.leadsService.report();
+  }
+
+  @Query(() => [Report])
+  getOriginAggregiate(@Args('source', { type: () => String }) source: string) {
+    return this.leadsService.originAggregiate(source);
   }
 }
