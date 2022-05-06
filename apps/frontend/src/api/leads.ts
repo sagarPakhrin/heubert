@@ -86,9 +86,9 @@ export const useLeads = ({ page = 1, orderBy, filters }: UseLeadsProps) => {
   }
   let where = {};
 
-  if (filters?.origin.length || filters?.source.length) {
+  if (filters?.origin.length) {
     where = {
-      OR: [
+      AND: [
         {
           source: {
             in: filters?.source,

@@ -15,5 +15,5 @@ export class LeadsWhereInput {
   source?: StringFilter;
 
   @Field(() => [LeadsWhereInput], { nullable: true })
-  OR?: [LeadsWhereInput];
+  AND?: [LeadsWhereInput];
 }
