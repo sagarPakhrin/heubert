@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { LeadsOrderBy, SortOrder, useLeads } from '../../api/leads';
-import Drawer from '../../components/drawer';
+import Filter from '../../components/filter';
 import Pagination from '../../components/pagination';
 import LeadsTable from './components/leads-table';
 
 export interface Filters {
+  operator: 'AND' | 'OR';
   origin: string[];
   source: string[];
 }
@@ -14,6 +15,7 @@ export const Leads = () => {
   const [showDrawer, setShowDrawer] = useState<boolean>(false);
 
   const [activeFilters, setActiveFilters] = useState<Filters>({
+    operator: 'OR',
     origin: [],
     source: [],
   });
@@ -60,8 +62,7 @@ export const Leads = () => {
       />
 
       {showDrawer && (
-        <Drawer
-          open={showDrawer}
+        <Filter
           onClose={() => setShowDrawer(false)}
           activeFilters={activeFilters}
           setActiveFilters={setActiveFilters}

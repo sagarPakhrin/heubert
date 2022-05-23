@@ -85,10 +85,15 @@ export const useLeads = ({ page = 1, orderBy, filters }: UseLeadsProps) => {
     page = 1;
   }
   let where = {};
+  let operator = 'OR';
+
+  if (filters?.operator) {
+    operator = filters.operator;
+  }
 
   if (filters?.origin.length) {
     where = {
-      AND: [
+      [operator]: [
         {
           source: {
             in: filters?.source,

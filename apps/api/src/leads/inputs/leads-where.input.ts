@@ -16,4 +16,7 @@ export class LeadsWhereInput {
 
   @Field(() => [LeadsWhereInput], { nullable: true })
   AND?: [LeadsWhereInput];
+
+  @Field(() => [LeadsWhereInput], { nullable: true })
+  OR?: [LeadsWhereInput];
 }
